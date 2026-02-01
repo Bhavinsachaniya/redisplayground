@@ -1,0 +1,16 @@
+/* TEAM */
+Developer: Redis in Action Team
+Site: https://redis-in-action.pages.dev
+Location: Worldwide
+
+/* THANKS */
+Redis Community
+React Community
+Vite Team
+Tailwind CSS Team
+
+/* SITE */
+Last update: 2026/02/01
+Standards: HTML5, CSS3, ES2022
+Components: React 19, Vite 6, Tailwind CSS, Framer Motion
+Software: Visual Studio Code
