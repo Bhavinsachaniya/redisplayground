@@ -126,18 +126,18 @@ const Sidebar: React.FC<SidebarProps> = ({ modules, currentModuleId, completedMo
       {/* Footer / Social Section */}
       <div className="p-4 border-t border-slate-700/50 bg-slate-900/30 shrink-0">
         <div className="flex justify-center items-center gap-5 mb-3">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-all transform hover:scale-110 hover:rotate-3" aria-label="GitHub">
+            <a href="https://github.com/bhavinsachaniya" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-all transform hover:scale-110 hover:rotate-3" aria-label="GitHub">
                 <Github className="w-5 h-5" />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-[#0077b5] transition-all transform hover:scale-110 hover:-rotate-3" aria-label="LinkedIn">
+            <a href="https://linkedin.com/in/bhavindotdraft" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-[#0077b5] transition-all transform hover:scale-110 hover:-rotate-3" aria-label="LinkedIn">
                 <Linkedin className="w-5 h-5" />
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-emerald-400 transition-all transform hover:scale-110 hover:rotate-3" aria-label="Portfolio">
+            <a href="https://bhavinsachaniya.in" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-emerald-400 transition-all transform hover:scale-110 hover:rotate-3" aria-label="Portfolio">
                 <Globe className="w-5 h-5" />
             </a>
         </div>
         <div className="text-[10px] text-slate-600 text-center font-mono uppercase tracking-widest opacity-70">
-           Engineer • v1.1.0
+          Redis Playground
         </div>
       </div>
     </div>
