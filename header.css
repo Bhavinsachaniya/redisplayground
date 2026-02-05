@@ -1,0 +1,485 @@
+/* ==========================================
+   PROFESSIONAL HEADER CSS - MODERN STANDARDS
+   ==========================================
+   
+   Features:
+   - Mobile-first responsive design
+   - Flexbox layout engine
+   - CSS Custom Properties (Variables)
+   - Modern fluid sizing with clamp()
+   - Logical properties for future-proofing
+   - Hardware acceleration for smooth performance
+   ========================================== */
+
+/* ==========================================
+   CSS CUSTOM PROPERTIES (VARIABLES)
+   ========================================== */
+:root {
+  /* Color Palette */
+  --header-bg: #1e293b;
+  --header-border: rgba(71, 85, 105, 0.5);
+  --header-text: #e2e8f0;
+  --header-text-muted: #94a3b8;
+  --header-accent: #ff0000;
+  --header-accent-hover: #ff3333;
+  --header-shadow: rgba(0, 0, 0, 0.3);
+  
+  /* Spacing System */
+  --header-height: 60px;
+  --header-padding-inline: clamp(1rem, 4vw, 2rem);
+  --header-gap: clamp(0.5rem, 2vw, 1rem);
+  --logo-size: 2rem;
+  --button-size: 48px;
+  
+  /* Typography */
+  --header-font-size: clamp(0.875rem, 2vw, 1rem);
+  --header-font-weight: 600;
+  
+  /* Z-Index Scale */
+  --z-header: 1000;
+  --z-overlay: 999;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+}
+
+/* ==========================================
+   GLOBAL RESETS & BOX SIZING
+   ========================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default margins that cause layout shifts */
+body,
+h1,
+h2,
+nav,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove default button styling */
+button {
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Remove tap highlight on mobile */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent horizontal scroll bugs */
+body {
+  overflow-x: hidden;
+}
+
+/* ==========================================
+   HEADER STRUCTURE
+   ========================================== */
+.site-header {
+  /* Layout */
+  position: sticky;
+  top: 0;
+  inset-inline: 0;
+  z-index: var(--z-header);
+  
+  /* Sizing */
+  block-size: var(--header-height);
+  inline-size: 100%;
+  
+  /* Visual */
+  background-color: var(--header-bg);
+  border-block-end: 1px solid var(--header-border);
+  box-shadow: 0 4px 6px -1px var(--header-shadow);
+  
+  /* Display & Layout */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--header-gap);
+  padding-inline: var(--header-padding-inline);
+  
+  /* Performance Optimization */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  
+  /* Prevent content overflow */
+  overflow: hidden;
+}
+
+/* ==========================================
+   LOGO SECTION
+   ========================================== */
+.site-logo {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  /* Prevent shrinking */
+  flex-shrink: 0;
+  
+  /* Interactive */
+  text-decoration: none;
+  color: inherit;
+  transition: opacity var(--transition-fast);
+}
+
+.site-logo:hover {
+  opacity: 0.9;
+}
+
+.site-logo:focus-visible {
+  outline: 2px solid var(--header-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.logo-icon {
+  /* Sizing with aspect ratio to prevent layout shifts */
+  inline-size: var(--logo-size);
+  block-size: var(--logo-size);
+  aspect-ratio: 1;
+  
+  /* Visual */
+  border-radius: 0.5rem;
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  
+  /* Flexbox centering for icon inside */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Icon color */
+  color: var(--header-accent);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.logo-title {
+  font-size: var(--header-font-size);
+  font-weight: var(--header-font-weight);
+  line-height: 1;
+  color: var(--header-text);
+  
+  /* Modern text wrapping */
+  text-wrap: balance;
+}
+
+.logo-title-accent {
+  color: var(--header-accent);
+}
+
+.logo-subtitle {
+  font-size: 0.625rem;
+  color: var(--header-text-muted);
+  line-height: 1;
+}
+
+/* ==========================================
+   NAVIGATION
+   ========================================== */
+.main-nav {
+  /* Hide on mobile, show on desktop */
+  display: none;
+  
+  /* Grow to fill available space */
+  flex-grow: 1;
+  
+  /* Center navigation items */
+  justify-content: center;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: var(--header-gap);
+}
+
+.nav-link {
+  /* Typography */
+  font-size: var(--header-font-size);
+  font-weight: 500;
+  color: var(--header-text-muted);
+  text-decoration: none;
+  
+  /* Layout */
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+  border-radius: 0.375rem;
+  
+  /* Interactive */
+  transition: all var(--transition-base);
+  cursor: pointer;
+  
+  /* Touch target size */
+  min-block-size: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  color: var(--header-text);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--header-accent);
+  outline-offset: 2px;
+}
+
+.nav-link.active {
+  color: var(--header-accent);
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* ==========================================
+   ACTION BUTTONS
+   ========================================== */
+.header-actions {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  /* Prevent shrinking */
+  flex-shrink: 0;
+}
+
+.action-button {
+  /* Sizing */
+  min-inline-size: var(--button-size);
+  min-block-size: var(--button-size);
+  
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  
+  /* Visual */
+  color: var(--header-text-muted);
+  border-radius: 0.375rem;
+  
+  /* Interactive */
+  transition: all var(--transition-fast);
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  color: var(--header-text);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.action-button:active {
+  transform: scale(0.95);
+}
+
+.action-button:focus-visible {
+  outline: 2px solid var(--header-accent);
+  outline-offset: 2px;
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+  /* Only show on mobile */
+  display: flex;
+}
+
+/* ==========================================
+   MOBILE OVERLAY MENU
+   ========================================== */
+.mobile-menu-overlay {
+  /* Positioning */
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  
+  /* Visual */
+  background-color: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(8px);
+  
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  padding-block-start: calc(var(--header-height) + 1rem);
+  padding-inline: var(--header-padding-inline);
+  
+  /* Animation */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.mobile-menu-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mobile-nav-link {
+  /* Typography */
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--header-text-muted);
+  text-decoration: none;
+  
+  /* Layout */
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--header-border);
+  
+  /* Interactive */
+  transition: all var(--transition-base);
+  
+  /* Touch target */
+  min-block-size: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:focus-visible {
+  color: var(--header-text);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--header-accent);
+}
+
+.mobile-nav-link.active {
+  color: var(--header-accent);
+  background-color: rgba(255, 0, 0, 0.1);
+  border-color: var(--header-accent);
+}
+
+/* ==========================================
+   RESPONSIVE BREAKPOINTS
+   ========================================== */
+
+/* Tablet and up (768px) */
+@media (min-width: 48rem) {
+  :root {
+    --header-height: 70px;
+    --logo-size: 2.5rem;
+  }
+  
+  .main-nav {
+    display: flex;
+  }
+  
+  .menu-toggle {
+    display: none;
+  }
+  
+  .mobile-menu-overlay {
+    display: none;
+  }
+}
+
+/* Desktop (1024px) */
+@media (min-width: 64rem) {
+  :root {
+    --header-height: 80px;
+    --header-padding-inline: 2rem;
+    --header-gap: 1.5rem;
+  }
+  
+  .nav-link {
+    padding-inline: 1rem;
+  }
+}
+
+/* Large desktop (1280px+) */
+@media (min-width: 80rem) {
+  :root {
+    --header-padding-inline: clamp(2rem, 5vw, 4rem);
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY ENHANCEMENTS
+   ========================================== */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .site-header {
+    will-change: auto;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .site-header {
+    border-block-end-width: 2px;
+  }
+  
+  .nav-link:focus-visible,
+  .action-button:focus-visible {
+    outline-width: 3px;
+  }
+}
+
+/* Dark mode optimization (if needed) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --header-shadow: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ==========================================
+   PRINT STYLES
+   ========================================== */
+@media print {
+  .site-header {
+    position: static;
+    box-shadow: none;
+    border-block-end: 1px solid #000;
+  }
+  
+  .menu-toggle,
+  .header-actions {
+    display: none;
+  }
+  
+  .main-nav {
+    display: none;
+  }
+}
