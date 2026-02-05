@@ -100,10 +100,10 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-[100dvh] bg-robot-dark text-slate-200 font-sans overflow-hidden">
+    <div className="flex flex-col lg:flex-row h-[100dvh] bg-robot-dark text-slate-200 font-sans overflow-hidden">
       
-      {/* Mobile Header - High Z-Index to stay above overlay */}
-      <div className="md:hidden flex items-center justify-between px-4 py-3 bg-robot-panel border-b border-slate-700/50 shrink-0 relative z-50 shadow-md">
+      {/* Mobile Header - Fixed positioning for better Android Chrome compatibility */}
+      <header className="lg:hidden w-full bg-robot-panel border-b border-slate-700/50 shrink-0 fixed top-0 left-0 right-0 shadow-lg" style={{ zIndex: 9999, height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem' }}>
         <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-redis-500/10 flex items-center justify-center border border-redis-500/20">
                 <Database className="w-5 h-5 text-redis-500" />
@@ -117,13 +117,19 @@ const App: React.FC = () => {
         </div>
         <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-            className="p-2 -mr-2 text-slate-400 hover:text-white transition-colors active:scale-95"
+            className="p-2 text-slate-300 hover:text-white transition-colors active:scale-95 flex items-center justify-center"
+            style={{ minWidth: '48px', minHeight: '48px', WebkitTapHighlightColor: 'transparent' }}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            type="button"
         >
             {mobileMenuOpen ? <X className="w-6 h-6 text-red-400" /> : <Menu className="w-6 h-6" />}
         </button>
-      </div>
+      </header>
+      
+      {/* Spacer for fixed header on mobile */}
+      <div className="lg:hidden" style={{ height: '60px' }} />
 
-      {/* Mobile Sidebar Overlay - Z-40 to sit behind Header */}
+      {/* Mobile Sidebar Overlay - Below Header */}
       <AnimatePresence>
       {mobileMenuOpen && (
         <motion.div 
@@ -131,7 +137,8 @@ const App: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-slate-900/95 backdrop-blur-md md:hidden flex flex-col pt-16"
+            className="fixed inset-0 bg-slate-900/95 backdrop-blur-md lg:hidden flex flex-col"
+            style={{ zIndex: 9998, paddingTop: '60px' }}
         >
              <div className="flex-1 overflow-y-auto px-4 py-4">
                  <h2 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2">
@@ -218,8 +225,8 @@ const App: React.FC = () => {
       />
 
       <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative bg-slate-900/50">
-         {/* Mobile Tab Switcher - only visible on mobile */}
-         <div className="md:hidden px-4 py-2 bg-slate-900 border-b border-slate-800 shrink-0">
+         {/* Mobile Tab Switcher - only visible on mobile and tablet */}
+         <div className="lg:hidden px-4 py-2 bg-slate-900 border-b border-slate-800 shrink-0" style={{ position: 'sticky', top: 0, zIndex: 100 }}>
              <div className="flex bg-slate-800 p-1 rounded-lg">
                  <button 
                     onClick={() => setMobileTab('terminal')}
@@ -246,9 +253,9 @@ const App: React.FC = () => {
              </div>
          </div>
 
-         <div className="flex-1 flex flex-col md:flex-row p-2 md:p-4 gap-2 md:gap-4 min-h-0 overflow-hidden">
+         <div className="flex-1 flex flex-col lg:flex-row p-2 lg:p-4 gap-2 lg:gap-4 min-h-0 overflow-hidden">
             {/* Left Column: Guide & Terminal */}
-            <div className={`flex flex-col gap-2 md:gap-4 w-full md:w-1/2 h-full min-h-0 ${mobileTab === 'visualizer' ? 'hidden md:flex' : 'flex'}`}>
+            <div className={`flex flex-col gap-2 lg:gap-4 w-full lg:w-1/2 h-full min-h-0 ${mobileTab === 'visualizer' ? 'hidden lg:flex' : 'flex'}`}>
                 {/* Guide shrinks/expands on mobile via internal state, but here we just place it */}
                 <div className="flex-none z-10">
                     <StepGuide 
@@ -270,7 +277,7 @@ const App: React.FC = () => {
             </div>
 
             {/* Right Column: Visualizer */}
-            <div className={`flex-1 h-full min-h-0 ${mobileTab === 'terminal' ? 'hidden md:block' : 'block'}`}>
+            <div className={`flex-1 h-full min-h-0 ${mobileTab === 'terminal' ? 'hidden lg:block' : 'block'}`}>
                 <WarehouseVisualizer store={store} />
             </div>
          </div>
