@@ -100,10 +100,10 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-[100dvh] bg-robot-dark text-slate-200 font-sans overflow-hidden">
+    <div className="flex flex-col h-[100dvh] bg-robot-dark text-slate-200 font-sans overflow-hidden">
       
-      {/* Mobile Header - Fixed positioning for better Android Chrome compatibility */}
-      <header className="lg:hidden w-full bg-robot-panel border-b border-slate-700/50 shrink-0 fixed top-0 left-0 right-0 shadow-lg" style={{ zIndex: 9999, height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem' }}>
+      {/* Unified Header - Shows on ALL screen sizes (Android, Tablet, Desktop) */}
+      <header className="w-full bg-robot-panel border-b border-slate-700/50 shrink-0 fixed top-0 left-0 right-0 shadow-lg" style={{ zIndex: 9999, height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem' }}>
         <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-redis-500/10 flex items-center justify-center border border-redis-500/20">
                 <Database className="w-5 h-5 text-redis-500" />
@@ -126,10 +126,10 @@ const App: React.FC = () => {
         </button>
       </header>
       
-      {/* Spacer for fixed header on mobile */}
-      <div className="lg:hidden" style={{ height: '60px' }} />
+      {/* Spacer for fixed header - Shows on ALL screen sizes */}
+      <div style={{ height: '60px' }} />
 
-      {/* Mobile Sidebar Overlay - Below Header */}
+      {/* Sidebar Overlay - Below Header - Shows on ALL screen sizes */}
       <AnimatePresence>
       {mobileMenuOpen && (
         <motion.div 
@@ -137,7 +137,7 @@ const App: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-slate-900/95 backdrop-blur-md lg:hidden flex flex-col"
+            className="fixed inset-0 bg-slate-900/95 backdrop-blur-md flex flex-col"
             style={{ zIndex: 9998, paddingTop: '60px' }}
         >
              <div className="flex-1 overflow-y-auto px-4 py-4">
@@ -213,17 +213,7 @@ const App: React.FC = () => {
       )}
       </AnimatePresence>
 
-      <Sidebar 
-        modules={CURRICULUM.modules} 
-        currentModuleId={currentModuleId}
-        completedModules={completedModules}
-        currentStepIndex={currentStepIndex}
-        onSelectModule={(id) => {
-            setCurrentModuleId(id);
-            setCurrentStepIndex(0);
-        }}
-      />
-
+      {/* Main content area with consistent layout across all devices */}
       <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative bg-slate-900/50">
          {/* Mobile Tab Switcher - only visible on mobile and tablet */}
          <div className="lg:hidden px-4 py-2 bg-slate-900 border-b border-slate-800 shrink-0" style={{ position: 'sticky', top: 0, zIndex: 100 }}>
